@@ -1,6 +1,8 @@
-require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`,
-})
+// var firestore = require("./firebase.js");
+
+// require("dotenv").config({
+//   path: `.env.${process.env.NODE_ENV}`,
+// })
 
 module.exports = {
   siteMetadata: {
@@ -22,6 +24,7 @@ module.exports = {
               summary: doc.summary,
               description: doc.description,
               year: doc.year,
+              imageUrl: doc.imageUrl,
               author___NODE: doc.author.id
             })
           },

@@ -24,6 +24,7 @@ exports.createPages = ({graphql, actions}) => {
             description
             title
             year
+            imageUrl
             author {
               name
             }
@@ -36,7 +37,7 @@ exports.createPages = ({graphql, actions}) => {
             throw res.errors;
         }
 
-        const books = res.data.allBook.edges.sort((a,b) => a.year - b.year)
+        const books = res.data.allBook.edges
         books.forEach(book => (
             createPage({
                 path: `/book/${book.node.id}`,

@@ -4,10 +4,10 @@ import styled from 'styled-components'
 import {BookItem} from '../components/BookItem'
 
 const BookTemplate = (props) => {
-    const {title, description, year} = props.pageContext
+    const {title, description, year, imageUrl } = props.pageContext
     return (
         <Layout>
-            <BookItem title={title} description={description} year={year} />
+            <BookItem title={title} description={description} year={year} imageUrl={imageUrl}/>
         </Layout>
     )
 }

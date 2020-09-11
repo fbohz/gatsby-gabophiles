@@ -6,6 +6,7 @@ const BookItemWrapper = styled.section`
   border: 1px solid #ddd;
   padding: 8px;
   margin-bottom: 8px;
+  /* display: flex; */
   h2 {
     small {
       font-weight: normal;
@@ -15,14 +16,30 @@ const BookItemWrapper = styled.section`
   }
 `
 
-export const BookItem = ({ title, description, year, children }) => {
+const ImageWrapper = styled.img`
+    /* max-width: 200px;
+
+    img {
+        max-width: 200px; 
+    } */
+`
+
+const ContentWrapper = styled.div`
+    /* flex-grow: 1;
+    padding-left: 8px; */
+`
+
+export const BookItem = ({ title, description, year, children, imageUrl, noSummary }) => {
   return (
     <BookItemWrapper>
-      <h2>
-        {title} - <small>{year}</small>
-      </h2>
-      <p>{description}</p>
-      <div>{children}</div>
+        <img src={imageUrl} alt="book cover" />
+    <ContentWrapper>
+        <h2>
+            {title} - <small>{year}</small>
+        </h2>
+        <p style={{textAlign: 'left'}}>{noSummary ? null : description}</p>
+        <div>{children}</div>
+    </ContentWrapper>
     </BookItemWrapper>
   )
 }

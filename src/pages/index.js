@@ -9,7 +9,7 @@ import Layout from "../components/layout"
 // import SEO from "../components/seo"
 
 const LinkButton = styled.div`
-  text-align: right;
+  /* text-align: left; */
 
   a {
     padding: 8px;
@@ -25,7 +25,7 @@ const LinkButton = styled.div`
 `
 
 const IndexPage = (props) => {
-  const edges = props.data.allBook.edges
+  const edges = props.data.allBook.edges.sort((a,b) => a.node.year - b.node.year)
   return (
     <Layout>
       {
@@ -35,9 +35,11 @@ const IndexPage = (props) => {
              title={edge.node.title}
              description={edge.node.description}
              year={edge.node.year}
+             imageUrl={edge.node.imageUrl}
+             noSummary={true}
           >
           <LinkButton>
-          <Link to={`/book/${edge.node.id}`}>Join Conversation
+          <Link to={`/book/${edge.node.id}`}>Learn More
           </Link>
           </LinkButton>
           </BookItem>
@@ -50,7 +52,7 @@ const IndexPage = (props) => {
 
 export default IndexPage
 
-// Gatsby will read this query and inject result as props to Gattsby component
+// Gatsby will read this query and inject result as props to Gatsby component
 export const query = graphql`
   {
     allBook {
@@ -59,12 +61,30 @@ export const query = graphql`
         id
         description
         title
+        imageUrl
         year
-        author {
-          name
-        }
       }
     }
   }
   }
 `;
+
+// with Author name
+// export const query = graphql`
+//   {
+//     allBook {
+//     edges {
+//       node {
+//         id
+//         description
+//         title
+//         imageUrl
+//         year
+//         author {
+//           name
+//         }
+//       }
+//     }
+//   }
+//   }
+// `;
