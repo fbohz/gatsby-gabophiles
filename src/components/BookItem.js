@@ -29,13 +29,13 @@ const ContentWrapper = styled.div`
     padding-left: 8px; */
 `
 
-export const BookItem = ({ title, description, year, children, imageUrl, noSummary }) => {
+export const BookItem = ({ title, description, year, children, imageUrl, noSummary, authorName }) => {
   return (
     <BookItemWrapper>
         <img src={imageUrl} alt="book cover" />
     <ContentWrapper>
         <h2>
-            {title} - <small>{year}</small>
+            {title} - <small>{authorName} ({year})</small>
         </h2>
         <p style={{textAlign: 'left'}}>{noSummary ? null : description}</p>
         <div>{children}</div>

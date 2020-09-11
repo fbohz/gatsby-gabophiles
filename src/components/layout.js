@@ -35,7 +35,7 @@ const Layout = ({ children }) => {
         }}
       >
         <main>{children}</main>
-        <br/><footer>The Works of Gabriel Garcia Marquez (Gabo) | 
+        <br/><footer>Gabophiles The Magic Realism Book Library | 
           © {new Date().getFullYear()}, Built with
           {` `}
           <a href="https://www.gatsbyjs.org">Gatsby</a>
