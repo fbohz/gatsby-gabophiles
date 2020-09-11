@@ -24,7 +24,9 @@ exports.createPages = ({graphql, actions}) => {
             description
             title
             year
-            imageUrl
+            localImage {
+              publicURL
+            }
             author {
               name
             }

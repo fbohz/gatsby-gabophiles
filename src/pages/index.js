@@ -35,7 +35,7 @@ const IndexPage = (props) => {
              title={edge.node.title}
              description={edge.node.description}
              year={edge.node.year}
-             imageUrl={edge.node.imageUrl}
+             imageUrl={edge.node.localImage.publicURL}
              noSummary={true}
              authorName={edge.node.author.name}
           >
@@ -54,21 +54,6 @@ const IndexPage = (props) => {
 export default IndexPage
 
 // // Gatsby will read this query and inject result as props to Gatsby component
-// export const query = graphql`
-//   {
-//     allBook {
-//     edges {
-//       node {
-//         id
-//         description
-//         title
-//         imageUrl
-//         year
-//       }
-//     }
-//   }
-//   }
-// `;
 
 // with Author name
 export const query = graphql`
@@ -79,7 +64,9 @@ export const query = graphql`
         id
         description
         title
-        imageUrl
+        localImage {
+          publicURL
+        }
         year
         author {
           name
