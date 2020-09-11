@@ -4,4 +4,45 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-// You can delete this file if you're not using it
+ const path = require('path')
+ const bookTemplate = path.resolve('src/templates/bookTemplate.js')
+
+
+
+// Gatsby uses Redux under the hood 
+
+exports.createPages = ({graphql, actions}) => {
+    const {createPage} = actions
+
+    // this is a promise
+    return graphql(`
+    {
+        allBook {
+        edges {
+          node {
+            id
+            description
+            title
+            year
+            author {
+              name
+            }
+          }
+        }
+      }
+      }
+    `).then(res => {
+        if (res.errors) {
+            throw res.errors;
+        }
+
+        const books = res.data.allBook.edges.sort((a,b) => a.year - b.year)
+        books.forEach(book => (
+            createPage({
+                path: `/book/${book.node.id}`,
+                component: bookTemplate,
+                context: book.node
+            })
+          ))
+    })
+}
