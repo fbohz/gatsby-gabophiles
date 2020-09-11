@@ -5,16 +5,17 @@
   </a>
 </p>
 <h1 align="center">
-  Gatsby Gabophiles - Gabriel Garcia Marquez Works
+  Gabophiles - The Magic Realism Book Library
 </h1>
-
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.com/docs/gatsby-starters/)._
 
 ## 🚀 Gabophiles - Author Fan Site
 
 
 
 ## 🎓 FYI What is Gatsby
+
+You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.com/docs/gatsby-starters/)._
+
 
 Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.com/). Here are some places to start:
 
