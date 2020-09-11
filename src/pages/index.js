@@ -1,22 +1,47 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
+import {BookItem} from '../components/BookItem'
 
 import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
+// import Image from "../components/image"
+// import SEO from "../components/seo"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-  </Layout>
-)
+const IndexPage = (props) => {
+  const edges = props.data.allBook.edges
+  return (
+    <Layout>
+      {
+        edges.map(edge => (
+          <BookItem key={edge.node.id}>
+            <h2>{edge.node.title} - <small>{edge.node.author.name}</small></h2>
+            <div>{edge.node.description}</div>
+          <Link to={`/book/${edge.node.id}`}>Join Conversation
+          </Link>
+          </BookItem>
+          
+        ))
+      }
+    </Layout>
+    )
+}
 
 export default IndexPage
+
+// Gatsby will read this query and inject result as props to Gattsby component
+export const query = graphql`
+  {
+    allBook {
+    edges {
+      node {
+        id
+        description
+        title
+        year
+        author {
+          name
+        }
+      }
+    }
+  }
+  }
+`;
