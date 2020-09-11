@@ -7,10 +7,7 @@ const BookTemplate = (props) => {
     const {title, description, year} = props.pageContext
     return (
         <Layout>
-            <BookItem>
-                <h2>{title} - <small>{year}</small></h2>
-                <p>{description}</p>
-            </BookItem>
+            <BookItem title={title} description={description} year={year} />
         </Layout>
     )
 }

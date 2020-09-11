@@ -1,6 +1,10 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
-    title: `Gabophiles: Gabriel Garcia Marquez Works`,
+    title: `Gabophiles`,
     description: `All you need to know about the magic realism of Gabo`,
     author: `Felipe Bohorquez`,
   },
