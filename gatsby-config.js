@@ -1,10 +1,37 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Gabophiles: Gabriel Garcia Marquez Works`,
+    description: `All you need to know about the magic realism of Gabo`,
+    author: `Felipe Bohorquez`,
   },
   plugins: [
+    {
+      resolve: 'gatsby-firesource',
+      options: {
+        credential: require('./firebase.json'),
+        types: [
+          {
+            type: 'Book',
+            collection: 'books',
+            map: doc => ({
+              title: doc.title,
+              summary: doc.summary,
+              description: doc.description,
+              year: doc.year,
+              author___NODE: doc.author.id
+            })
+          },
+          {
+            type: 'Author',
+            collection: 'authors',
+            map: doc => ({
+              name: doc.name
+            })
+          } 
+        ]
+      }
+    },
+    `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
