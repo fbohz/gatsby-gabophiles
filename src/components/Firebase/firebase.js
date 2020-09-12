@@ -1,6 +1,7 @@
 import firebaseConfig from "./config";
 import axios from 'axios';
 
+
 class Firebase {
   constructor(app) {
     if(!firebaseInstance) {
@@ -25,6 +26,8 @@ class Firebase {
 let firebaseInstance;
 
 function getFirebaseInstance(app) {
+  // console.log(firebaseConfig)
+
   if(!firebaseInstance && app){
     firebaseInstance = new Firebase(app);
     return firebaseInstance;
