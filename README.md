@@ -5,10 +5,10 @@
   </a>
 </p>
 <h1 align="center">
-  Gabophiles - The Magic Realism Book Library
+   Gabophiles - The Magic Realism Book Library
 </h1>
 
-## 🚀 Gabophiles - Author Fan Site
+## 📗 Gabophiles - In Honor of Magic Realism Authors 💫
 
 
 
