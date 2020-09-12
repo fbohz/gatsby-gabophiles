@@ -8,11 +8,13 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import {FirebaseContext, useAuth} from './Firebase'
 
 import Header from "./header"
 import "./layout.css"
 
 const Layout = ({ children }) => {
+  const {user, firebase, loading} = useAuth()  
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -24,8 +26,10 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} />
+    <FirebaseContext.Provider
+      value={{user, firebase, loading}}
+    >
+      <Header siteTitle={data.site.siteMetadata.title}  />
       <div
         style={{
           margin: `0 auto`,
@@ -41,7 +45,7 @@ const Layout = ({ children }) => {
           <a href="https://www.gatsbyjs.org">Gatsby</a>
         </footer>
       </div>
-    </>
+    </FirebaseContext.Provider>
   )
 }
 
