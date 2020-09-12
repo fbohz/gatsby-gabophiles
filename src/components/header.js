@@ -2,7 +2,8 @@ import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
 import styled from "styled-components"
-
+import {FirebaseContext} from './Firebase'
+  
 const StyledHeader = styled.header`
   margin-bottom: 1.45rem;
   background-position: center center;
@@ -33,6 +34,14 @@ const Header = ({ siteTitle }) => (
           {siteTitle}
         </Link>
       </h1>
+      <FirebaseContext.Consumer>
+        {
+          props => {
+            console.log(props)
+            return <div></div>
+          }
+        }
+      </FirebaseContext.Consumer>
     </div>
   </StyledHeader>
 )
