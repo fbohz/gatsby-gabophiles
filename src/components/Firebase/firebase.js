@@ -22,9 +22,14 @@ class Firebase {
     await this.auth.signOut();
   }
 
-  async signup({email, password}){
-    // from npm firebase library 
-    return this.auth.createUserWithEmailAndPassword(email, password)
+  async signup({email, password, username}){
+    // createUserWithEmailAndPassword is from npm firebase library 
+    this.auth.createUserWithEmailAndPassword(email, password).then(newUser => {
+      // console.log(newUser.user.uid)
+      return this.db.collection('publicProfiles').doc(username).set({
+        userId: newUser.user.uid
+      })
+    })
   }
 
   async getUserProfile({userId}) {
