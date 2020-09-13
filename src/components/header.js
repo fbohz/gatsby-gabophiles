@@ -14,37 +14,39 @@ const StyledHeader = styled.header`
   padding: 40px;
 `
 
-const Header = ({ siteTitle }) => (
-  <StyledHeader>
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-      <FirebaseContext.Consumer>
-        {
-          props => {
-            console.log(props)
-            return <div></div>
+const Header = ({ siteTitle }) => {
+  return (
+    <StyledHeader>
+      <div
+        style={{
+          margin: `0 au to`,
+          maxWidth: 960,
+          padding: `1.45rem 1.0875rem`,
+        }}
+      >
+        <h1 style={{ margin: 0 }}>
+          <Link
+            to="/"
+            style={{
+              color: `white`,
+              textDecoration: `none`,
+            }}
+          >
+            {siteTitle}
+          </Link>
+        </h1>
+        <FirebaseContext.Consumer>
+          {
+            props => { 
+              console.log(props)
+              return <div></div>
+            }
           }
-        }
-      </FirebaseContext.Consumer>
-    </div>
-  </StyledHeader>
-)
+        </FirebaseContext.Consumer>
+      </div>
+    </StyledHeader>
+  )
+}
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
