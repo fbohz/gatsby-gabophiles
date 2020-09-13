@@ -26,6 +26,11 @@ class Firebase {
     // from npm firebase library 
     return this.auth.createUserWithEmailAndPassword(email, password)
   }
+
+  async getUserProfile({userId}) {
+    // .where where userId matches userId in db. And we don't want to subscribe to changes only call once with .get()
+    return this.db.collection('publicProfiles').where('userId', '==', userId).get()
+  }
 }
 
 let firebaseInstance;
