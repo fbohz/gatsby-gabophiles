@@ -21,6 +21,11 @@ class Firebase {
   async logout() {
     await this.auth.signOut();
   }
+
+  async signup({email, password}){
+    // from npm firebase library 
+    return this.auth.createUserWithEmailAndPassword(email, password)
+  }
 }
 
 let firebaseInstance;
@@ -36,6 +41,6 @@ function getFirebaseInstance(app) {
   }else{
     return null;
   }
-}
+} 
 
 export default getFirebaseInstance;
