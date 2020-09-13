@@ -36,6 +36,12 @@ class Firebase {
     // .where where userId matches userId in db. And we don't want to subscribe to changes only call once with .get()
     return this.db.collection('publicProfiles').where('userId', '==', userId).get()
   }
+
+  subscribeToComments({bookId, onSnapshot}) {
+    const bookRef = this.db.collection('books').doc(bookId)
+    // book below is a reference to a particular book. onSnapshot is called any time there are changes to data
+    return this.db.collection('comments').where('book', '==', bookRef).onSnapshot(onSnapshot)
+  }
 }
 
 let firebaseInstance;
