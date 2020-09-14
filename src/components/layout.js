@@ -40,9 +40,10 @@ const Layout = ({ children }) => {
       >
         <main>{children}</main>
         <br/><footer>Gabophiles - The Magic Realism Book Library | 
-          © {new Date().getFullYear()}, Built with
+          © {new Date().getFullYear()} Built with
           {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
+          <a href="https://www.gatsbyjs.org">Gatsby</a>&nbsp;by&nbsp;
+          <a href="https://github.com/fbohz">Fbohz</a>
         </footer>
       </div>
     </FirebaseContext.Provider>
