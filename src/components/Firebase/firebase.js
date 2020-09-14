@@ -1,5 +1,5 @@
 import firebaseConfig from "./config";
-import axios from 'axios';
+// import axios from 'axios';
 
 
 class Firebase {
@@ -42,6 +42,28 @@ class Firebase {
       .where('userId', '==', userId)
       .limit(1)
       .onSnapshot(onSnapshot)
+  }
+
+  async createAuthor({authorName}){
+    const createAuthorCallable = this.functions.httpsCallable('createAuthor');
+    return createAuthorCallable({
+      authorName
+    });
+  }
+
+  async getAuthors(){
+    return this.db.collection('authors').get();
+  }
+
+  async createBook({bookName, authorId, imageUrl, description, year}){
+    const createBookCallable = this.functions.httpsCallable('createBook');
+    return createBookCallable({
+      imageUrl,
+      bookName,
+      authorId,
+      description,
+      year: parseInt(year)
+    })
   }
 
   async createComment({text, bookId}){
