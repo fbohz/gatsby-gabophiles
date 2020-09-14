@@ -16,13 +16,13 @@ const BookItemWrapper = styled.section`
   }
 `
 
-const ImageWrapper = styled.img`
-    /* max-width: 200px;
+// const ImageWrapper = styled.img`
+//     max-width: 200px;
 
-    img {
-        max-width: 200px; 
-    } */
-`
+//     img {
+//         max-width: 200px; 
+//     } 
+// `
 
 const ContentWrapper = styled.div`
     /* flex-grow: 1;
