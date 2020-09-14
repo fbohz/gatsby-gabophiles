@@ -11,7 +11,8 @@ const Signup = () => {
     const [formValues, setFormValues] = useState({
         email: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        username: ''
     })
 
     const handleSubmit = (e) => {
@@ -20,7 +21,8 @@ const Signup = () => {
         if (formValues.password === formValues.confirmPassword) {
               firebase.signup({
                   email: formValues.email,
-                  password: formValues.password
+                  password: formValues.password,
+                  username: formValues.username
               }).then(() => {
                 navigate("/")
               }).catch(e => {
@@ -46,6 +48,7 @@ const Signup = () => {
 
     return (
         <Form onSubmit={handleSubmit}>
+            <Input onChange={handleChange} value={formValues.username} name="username" placeholder="username" type="text" required />
             <Input onChange={handleChange} value={formValues.email} name="email" placeholder="email" type="email" required />
             <Input onChange={handleChange} value={formValues.password} name="password" placeholder="password" type="password" minLength={6} required />
             <Input onChange={handleChange} value={formValues.confirmPassword} name="confirmPassword" placeholder="confirm password" type="password" minLength={6} required />
