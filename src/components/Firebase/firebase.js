@@ -37,10 +37,21 @@ class Firebase {
     return this.db.collection('publicProfiles').where('userId', '==', userId).get()
   }
 
+  async createComment({text, bookId}){
+    const postCommentCallable = this.functions.httpsCallable('postComment');
+    return postCommentCallable({
+      text,
+      bookId
+    });
+  }
+
   subscribeToComments({bookId, onSnapshot}) {
     const bookRef = this.db.collection('books').doc(bookId)
     // book below is a reference to a particular book. onSnapshot is called any time there are changes to data
-    return this.db.collection('comments').where('book', '==', bookRef).onSnapshot(onSnapshot)
+    return this.db.collection('comments')
+    .where('book', '==', bookRef)
+    .orderBy('dateCreated', 'desc')
+    .onSnapshot(onSnapshot)
   }
 }
 
