@@ -4,7 +4,7 @@ import {BookItem} from '../components/BookItem'
 import styled from "styled-components"
 
 
-import Layout from "../components/layout"
+// import Layout from "../components/layout"
 // import Image from "../components/image"
 // import SEO from "../components/seo"
 
@@ -27,7 +27,7 @@ const LinkButton = styled.div`
 const IndexPage = (props) => {
   const edges = props.data.allBook.edges.sort((a,b) => a.node.year - b.node.year)
   return (
-    <Layout>
+    <section>
       {
         edges.map(edge => (
           <BookItem 
@@ -47,7 +47,7 @@ const IndexPage = (props) => {
           
         ))
       }
-    </Layout>
+    </section>
     )
 }
 
