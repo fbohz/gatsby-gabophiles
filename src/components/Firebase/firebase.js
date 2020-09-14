@@ -23,18 +23,25 @@ class Firebase {
   }
 
   async signup({email, password, username}){
-    // createUserWithEmailAndPassword is from npm firebase library 
-    this.auth.createUserWithEmailAndPassword(email, password).then(newUser => {
-      // console.log(newUser.user.uid)
-      return this.db.collection('publicProfiles').doc(username).set({
-        userId: newUser.user.uid
-      })
+    await this.auth.createUserWithEmailAndPassword(email, password);
+    const createProfileCallable = this.functions.httpsCallable('createPublicProfile');
+    return createProfileCallable({
+      username
     })
   }
 
-  async getUserProfile({userId}) {
-    // .where where userId matches userId in db. And we don't want to subscribe to changes only call once with .get()
-    return this.db.collection('publicProfiles').where('userId', '==', userId).get()
+  // getUserProfile({userId}) {
+  //   // .where where userId matches userId in db. And we don't want to subscribe to changes only call once with .get()
+  //   return this.db.collection('publicProfiles').where('userId', '==', userId).get()
+  // }
+
+  // attempt at  with server side
+
+  getUserProfile({userId, onSnapshot}){
+    return this.db.collection('publicProfiles')
+      .where('userId', '==', userId)
+      .limit(1)
+      .onSnapshot(onSnapshot)
   }
 
   async createComment({text, bookId}){
