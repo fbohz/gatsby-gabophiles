@@ -1,11 +1,11 @@
 import firebaseConfig from "./config";
 // import axios from 'axios';
 
-
 class Firebase {
   constructor(app) {
     if(!firebaseInstance) {
       app.initializeApp(firebaseConfig);
+      // console.log(firebaseConfig, process.env)
 
       this.auth = app.auth();
       this.db = app.firestore();
