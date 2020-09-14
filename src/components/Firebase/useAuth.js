@@ -17,7 +17,41 @@ function useAuth() {
 
             unsubscribe = firebaseInstance.auth.onAuthStateChanged(userResult => {
                 if (userResult) {
-                    setUser(userResult);
+                    
+                    firebaseInstance.getUserProfile({
+                        userId: userResult.uid
+                    }).then(res => {
+                        setUser({
+                            ...userResult,
+                            username: res.empty ? null : res.docs[0].id
+                        });
+                    })
+                    
+                }else{
+                    setUser(null);
+                }
+
+                setLoading(false);
+            })
+        })
+
+        return () => {
+            if (unsubscribe) {
+                unsubscribe()
+            }
+
+            if (publicProfileUnsubscribe) {
+                publicProfileUnsubscribe()
+            }
+        }
+    }, [])
+
+    return { user, firebase, loading }
+}
+
+export default useAuth
+
+
                     // get user custom claims
                     /*setLoading(true);
                     Promise.all([
@@ -56,26 +90,3 @@ function useAuth() {
                             setLoading(false)
                         }
                     })*/
-                }else{
-                    setUser(null);
-                }
-
-                setLoading(false);
-            })
-        })
-
-        return () => {
-            if (unsubscribe) {
-                unsubscribe()
-            }
-
-            if (publicProfileUnsubscribe) {
-                publicProfileUnsubscribe()
-            }
-        }
-    }, [])
-
-    return { user, firebase, loading }
-}
-
-export default useAuth
