@@ -4,4 +4,12 @@
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
 
-// You can delete this file if you're not using it
+const React = require('react')
+
+// importing default import from layout
+const Layout = require('./src/components/layout').default
+
+// gatsby element 
+exports.wrapPageElement = ({element, props}) => {
+    return <Layout {...props} >{element}</Layout>
+}
