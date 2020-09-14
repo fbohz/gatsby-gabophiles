@@ -28,16 +28,6 @@ module.exports = {
           "auth_provider_x509_cert_url": process.env.FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
           "client_x509_cert_url": process.env.FIREBASE_CLIENT_X509_CERT_URL
      },
-    //  credential: {
-    //   "apiKey": process.env.FIREBASE_apiKey,
-    //   "authDomain": process.env.FIREBASE_authDomain,
-    //   "databaseURL": process.env.FIREBASE_databaseURL,
-    //   "project_id": process.env.FIREBASE_PROJECT_ID,
-    //   "storageBucket": process.env.FIREBASE_storageBucket,
-    //   "messagingSenderId": process.env.FIREBASE_messagingSenderId,
-    //   "appId": process.env.FIREBASE_appId,
-    //   "measurementId": process.env.FIREBASE_measurementId
-    //  },
         types: [
           {
             type: 'Book',
