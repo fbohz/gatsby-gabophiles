@@ -7,10 +7,11 @@ const FormField = styled.div`
   margin-bottom: 20px;
 `
 
-let fileReader;
-if(typeof window !== 'undefined'){
-  fileReader = new FileReader();
-}
+// refactor NO file upload rather imageUrl
+// let fileReader;
+// if(typeof window !== 'undefined'){
+//   fileReader = new FileReader();
+// }
 
 const AddBook = () => {
   const {firebase} = useContext(FirebaseContext);
@@ -20,7 +21,9 @@ const AddBook = () => {
   const [authorId, setAuthorId] = useState('');
   const [description, setDescription] = useState('');
   const [success, setSuccess] = useState(false);
-
+  const [year, setYear] = useState('');
+  
+  // FIXING: Can't perform a React state update on an unmounted component
   let isMounted = true;
 
   useEffect(() => {
@@ -29,11 +32,12 @@ const AddBook = () => {
     }
   }, [])
 
-  useEffect(() => {
-    fileReader.addEventListener('load', () => {
-      setImageUrl(fileReader.result);
-    })
-  }, []);
+  // file upload use effect
+//   useEffect(() => {
+//     fileReader.addEventListener('load', () => {
+//       setImageUrl(fileReader.result);
+//     })
+//   }, []);
 
   useEffect(() => {
     // query all available authors
@@ -60,10 +64,11 @@ const AddBook = () => {
     <Form onSubmit={(e) => {
       e.preventDefault();
       firebase.createBook({
-        setImageUrl,
+        imageUrl,
         bookName,
         authorId,
-        description
+        description,
+        year
       }).then(() => {
         if(isMounted) {
           setSuccess(true)
@@ -75,7 +80,7 @@ const AddBook = () => {
           e.persist();
           setSuccess(false);
           setBookName(e.target.value)
-        }} />
+        }} required />
       </FormField>
       <FormField>
         <strong>
@@ -98,13 +103,31 @@ const AddBook = () => {
       </FormField>
       <FormField>
         <strong>
-          Book Cover (File)
+          Image URL
         </strong>
-        <Input type="file" onChange={e => {
+        {/* <Input type="file" onChange={e => {
           e.persist();
           setSuccess(false);
           fileReader.readAsDataURL(e.target.files[0])
-        }} />
+        }} /> */}
+        <Input type="url" placeholder="add image URL" value={imageUrl} onChange={e => {
+          e.persist();
+          setSuccess(false);
+          setImageUrl(e.target.value)
+        }} required />
+      </FormField>
+      <FormField>
+        <strong>
+          year
+        </strong>
+        <Input type="number" placeholder="book year" value={year}
+          min={1900}
+          max={new Date().getFullYear()}
+          onChange={e => {
+            e.persist();
+            setSuccess(false);
+            setYear(e.target.value)
+          }} required/>
       </FormField>
       <FormField>
         <strong>
@@ -115,7 +138,7 @@ const AddBook = () => {
             e.persist();
             setSuccess(false);
             setDescription(e.target.value)
-          }}/>
+          }} required/>
       </FormField>
       {!!success &&
         <span>
